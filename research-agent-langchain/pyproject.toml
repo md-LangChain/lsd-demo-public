@@ -1,0 +1,31 @@
+[project]
+name = "research-agent-langchain"
+version = "0.1.0"
+description = "LangChain create_agent research agent with OpenAI web search"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langchain>=0.3.0",
+    "langchain-openai>=0.3.0",
+    "langgraph>=1.0.0",
+    "langgraph-sdk>=0.1.0",
+    "langsmith>=0.3.0",
+    "python-dotenv>=1.0.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "anyio>=4.7.0",
+    "langgraph-cli[inmem]>=0.4.10",
+    "langgraph-api>=0.11.0",
+    "pytest>=8.3.5",
+    "ruff>=0.8.0",
+]
+
+[tool.uv.build-backend]
+module-name = "deep_agent"
+source-include = ["langgraph.json", ".env.example", "Makefile"]

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LangChain · Agent chat</title>
+    <link rel="icon" href="/static/logo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true">
+      <div class="grid"></div>
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+    </div>
+
+    <div class="app">
+      <header class="top">
+        <div class="brand">
+          <img class="brand-logo" src="/static/logo.svg" width="40" height="40" alt="" />
+          <div class="brand-copy">
+            <p class="brand-mark">LangChain</p>
+            <h1>Agent chat</h1>
+          </div>
+        </div>
+        <div class="status-row">
+          <span id="key-pill" class="pill warn">API key …</span>
+          <span id="thread-pill" class="pill muted">no thread</span>
+        </div>
+      </header>
+
+      <section class="connect" aria-label="Connection">
+        <label class="field grow">
+          <span>Deployment</span>
+          <select id="deployment-select">
+            <option value="">Scan LangSmith…</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Assistant</span>
+          <select id="assistant-select" disabled>
+            <option value="">Select a deployment first</option>
+          </select>
+        </label>
+        <div class="connect-actions">
+          <button id="btn-refresh-deployments" type="button">Refresh</button>
+          <button id="btn-connect" class="primary" type="button">Connect</button>
+          <button id="btn-new" type="button">New thread</button>
+          <button id="btn-reconnect" type="button" title="Clear thread and choose a different agent">
+            New connection
+          </button>
+        </div>
+        <label class="field grow">
+          <span>Agent Server URL</span>
+          <input
+            id="server-url"
+            spellcheck="false"
+            placeholder="https://&lt;deployment&gt;.us.langgraph.app"
+            autocomplete="off"
+          />
+        </label>
+        <label class="field">
+          <span>assistant_id</span>
+          <input id="assistant-id" spellcheck="false" placeholder="graph or assistant id" autocomplete="off" />
+        </label>
+        <div class="options-row">
+          <label class="field">
+            <span>Double-text strategy</span>
+            <select id="multitask-strategy">
+              <option value="enqueue">Enqueue</option>
+              <option value="reject">Reject</option>
+              <option value="interrupt">Interrupt</option>
+              <option value="rollback">Rollback</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Response</span>
+            <select id="response-mode">
+              <option value="wait">Wait</option>
+              <option value="stream">Stream</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <main class="chat-shell">
+        <div id="log" class="log" role="log" aria-live="polite">
+          <div class="empty-state">
+            <img class="empty-logo" src="/static/logo.svg" width="48" height="48" alt="" />
+            <p class="empty-title">Talk to a running agent</p>
+            <p class="empty-copy">
+              Refresh deployments from LangSmith, pick an assistant, then connect.
+              You can still paste a URL and assistant id manually.
+            </p>
+          </div>
+        </div>
+
+        <form id="composer" class="composer">
+          <textarea
+            id="prompt"
+            rows="1"
+            placeholder="Message the agent…"
+            disabled
+          ></textarea>
+          <button id="btn-send" class="primary send" type="submit" disabled>Send</button>
+        </form>
+        <p id="status" class="status-line" aria-live="polite"></p>
+      </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
